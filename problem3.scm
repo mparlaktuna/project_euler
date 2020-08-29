@@ -1,8 +1,10 @@
+#!/usr/local/bin/guile -s
+!#
 (use-modules (ice-9 format))
 
 (define (largest-prime-factor val)
   (let more ([divider 1] [largest-factor 1])
-    (if (> divider (/ val 2))
+    (if (> divider (sqrt val))
 	largest-factor
 	(let ((is_factor (eqv? 0 (modulo val divider))))
 	  (when (and is_factor (is-prime divider)) (set! largest-factor divider))
@@ -10,13 +12,11 @@
 
 (define (is-prime val)
   (let more ([divider 2])
-    ;; (format #t "divider ~a" divider)
     (cond
-     ((> divider (/ val 2)) #t)
-     ((eqv? 0 (modulo val divider)) #f)
+     ((< val (* divider divider)) #t)
+     ((zero? (modulo val divider)) #f)
      (else (more (+ divider 1))))))
-	
-	
 
-(largest-prime-factor 13195)
-;; (is-prime 13)
+(format #t "Largets prime factor ~a\n" (largest-prime-factor 600851475143))
+
+
