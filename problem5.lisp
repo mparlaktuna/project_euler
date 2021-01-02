@@ -1,0 +1,20 @@
+(ql:quickload :alexandria)
+
+(defun smallest-multiple (limit)
+  (let ((values (alexandria:iota (1- limit) :start 2 :step 1))
+	(multipliers '()))
+    (format t "Values ~a" values)
+    (labels ((more (values multipliers)
+	       (if (null values)
+		   (print (reduce #'* multipliers))
+                   (progn
+		     (push (car values) multipliers)
+		     (more (mapcar (lambda (x)
+				     ;; (print x))
+				     (if (zerop (mod x (car values)))
+				     	 (/ x (car values))
+				     	 x))
+				   (cdr values)) multipliers)))))
+      (more values multipliers))))
+
+(smallest-multiple 20)
