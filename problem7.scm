@@ -1,4 +1,4 @@
-(use-modules (ice-9 format))
+`(use-modules (ice-9 format))
 
 (define (10001st-prime)
   (let more ([count 10001] [prime 2])
@@ -17,3 +17,4 @@
      (else (more (+ divider 1))))))
 
 (10001st-prime)
+'
