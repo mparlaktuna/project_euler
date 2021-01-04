@@ -1,0 +1,5 @@
+(defun sum-digits (x)
+  (let ((n (expt 2 x)))
+    (format t "number ~a" n)
+    (reduce #'(lambda (x1 x2)
+		(+ x1 (parse-integer (string x2)))) (write-to-string n) :initial-value 0)))
